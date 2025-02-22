@@ -93,23 +93,6 @@ def create_participant(request):
 
     return render(request, 'dashboard/create_participant.html', {"event_participant": event_participant})
 
-# def create_participant(request):
-    
-#      event_participant = ParticipantModelForm()
-#      if request.method == "POST":
-     
-#         event_participant =  ParticipantModelForm(request.POST)
-#         if event_participant.is_valid():
-#                 event_participant.save()
-              
-#                 return render(request,'dashboard/create_participant.html',{"event_participant":event_participant,"message": "added successfully"})  
-    
-#         else:
-           
-#             event_participant = ParticipantModelForm()
-
-
-#      return render(request,'dashboard/create_participant.html',{"event_participant": event_participant})
 
 def update_event(request,id):
      event = Event.objects.get(id=id)
