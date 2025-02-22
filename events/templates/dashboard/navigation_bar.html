@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://kit.fontawesome.com/1c433b5b8c.js" crossorigin="anonymous"></script>
+</head>
+<body >
+    <!-- <div class="grid grid-flow-col md:grid-flow-col-dense  content-center"> -->
+         <div class="  bg-slate-100 py-3 px-3 ">
+          <div class="container mx-auto md:flex sm:flex-wrap  justify-between">
+            <div>
+                <h2 class="text-black font-bold">Event Management System</h2>
+                </div>
+            
+                 <div >
+                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" >Home</a>
+                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'dashboard' %}">Dashboard</a>
+                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'create-event' %}">Create Events</a>
+                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'create-participant' %}">Create Participants</a>
+                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'create-category' %}">Create Categories</a>
+                     
+                 </div>
+          </div>
+
+            
+         </div>
+         
+      <!-- </div> -->
+      
+      {% block events %}
+        
+      {% endblock events %}
+        
+      {% block forms %}
+            
+      {% endblock forms %}
+
+      
+      {% block details %}
+        
+      {% endblock details %}
+        
+            
+</body>
+</html>

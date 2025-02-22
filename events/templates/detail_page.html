@@ -1,0 +1,39 @@
+{% extends 'dashboard/navigation_bar.html' %}
+{% load static %}
+
+{% block details %}
+
+<div class="image-container mb-8">
+    <img src="{% static 'images/party.png' %}" alt="Party Image" class="image">
+    <div class="dark-overlay"></div>
+    <h1 class="text">Event Management System</h1>
+    
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 border border-red-500">
+
+    <div>
+        <div class="container mx-auto px-4 shadow-2xl">
+            <h3 class="font-bold text-lg">Featured Event</h3>
+            <h4 class="font-bold text-lg mb-1">{{event.name}}</h4>
+            <div class=" container mb-3">
+                 <img src="{% static 'images/4.jpg' %}"class="h-80" alt="">
+            </div>
+            <div class="flex justify-items-start gap-5">
+                <div class="shadow-lg bg-slate-300 rounded-md py-2 px-2">Date : {{event.date}}</div>
+                <div class="shadow-lg bg-slate-300 rounded-md py-2 px-2">Category : {{event.category}}</div>
+            </div>
+            <div class="mt-4">
+                <p>When people think about event marketing, they often focus on the end goal: an enjoyable in-person event where both the host and attendees find value. At Localist, we see the value in not just events themselves, but in the event marketing content. After all, marketing your event is what gets people through the door so they can even begin to have a great time at your event.
+
+                    ‍</p>
+            </div>
+          </div>
+        
+    </div>
+    
+    <div></div>
+  </div>
+
+
+{% endblock details %}

@@ -1,0 +1,26 @@
+{% extends 'dashboard/navigation_bar.html' %}
+{% block forms %}
+
+<div class="mx-auto shadow-lg w-96 py-3 px-3 ">
+   
+    <div >
+        {% if message %} <p>{{message}}</p>{% endif %}
+            
+    </div>
+ 
+        <form method="POST" >
+            {% csrf_token %}
+    
+            <div  class="text-center bg-red-500 text-white py-3   mb-3 w-full">
+                <h3>Participant</h3>
+            </div>
+            
+            {{event_participant.as_p}}
+    
+    
+            <button type="submit" class="bg-red-500 text-white py-1 px-2 mt-1 rounded-lg ">Submit</button>
+        </form>
+
+
+</div>
+{% endblock %}

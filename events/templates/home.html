@@ -1,0 +1,39 @@
+{% extends 'dashboard/navigation_bar.html' %}
+{% load static %}
+
+{% block details %}
+
+<div class="image-container mb-8">
+    <img src="{% static 'images/party.png' %}" alt="Party Image" class="image">
+    <div class="dark-overlay"></div>
+    <h1 class="text">Event Management System</h1>
+    
+</div>
+
+        <div class="container px-4 shadow-2xl">
+               
+          
+                <form method="GET" action="{% url 'home' %}"class="py-5 px-3" class="container mx-auto ">
+                   
+                    <input type="text" name="q" value="{{search_query}}" placeholder="Search Events.." class="border w-48">
+                    <button type="submit">Search</button>
+                </form>
+           
+
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.name }}</li>
+                {% empty %}
+                    <li>No events found.</li>
+                {% endfor %}
+            </ul>
+          </div>
+        
+
+    
+ 
+
+  
+
+
+{% endblock details %}

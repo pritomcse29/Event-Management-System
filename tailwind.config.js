@@ -5,7 +5,9 @@ module.exports = {
     "./**/templates/**/*.html", // Templates inside apps  
   ],
   theme: {
-    extend: {},
+    extend: {
+     
+    },
   },
   plugins: [],
 }
