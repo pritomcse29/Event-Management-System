@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-gray-100">
+   
+    {% if request.user.is_authenticated %}
+        {% include "logged_nav.html" %}
+    {% else %}
+        {% include "non_logged_nav.html" %}
+    {% endif %}
+    
+    <div>
+        <img src="{% static 'images/banner_event.png' %}" alt="">
+    </div>
+    {% include 'footer.html' %}
+<script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuBtn.addEventListener("click",()=>{
+        mobileMenu.classList.toggle("hidden");
+    })
+</script>
+ 
+ <!-- {% if user.is_authenticated %}
+ {{user}}
+ {{user.id}}
+ <form action="{% url 'sign-out' %}" method="POST">
+    {% csrf_token %}
+     <button type="submit">logout</button>
+</form>
+    {% else %}
+    anonymous
+ {% endif %} -->
+
+    
+</body>
+</html>

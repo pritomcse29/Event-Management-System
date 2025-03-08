@@ -1,0 +1,65 @@
+{% include 'participant_dashboard.html' %}
+
+{% block content %}
+{% if messages %}
+<div class="container mx-auto mt-4">
+    {% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container mx-auto mt-8">
+    <h1 class="font-bold text-lg text-center mb-3">Upcoming Event List</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 mx-auto">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-3 px-4 border-b text-left">Event Name</th>
+                    <th class="py-3 px-4 border-b text-left">Date</th>
+                    <th class="py-3 px-4 border-b text-left">Time</th>
+                    <th class="py-3 px-4 border-b text-left">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in upcoming_events %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">{{ event.name }}</td>
+                    <td class="py-3 px-4 border-b">{{ event.date }}</td>
+                    <td class="py-3 px-4 border-b">{{ event.time }}</td>
+                    <td class="py-3 px-4 border-b">
+                        {% if user in event.participants.all %}
+                            <span class="text-green-500">Already Registered</span>
+                        {% else %}
+                            <form method="POST" action="{% url 'participant-dashboard'  %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="event_id" value="{{ event.id }}">
+                                <button type="submit" class="px-3 py-1 bg-teal-500 text-white rounded-md hover:bg-teal-600">
+                                    Register
+                                </button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% if user.is_authenticated %}
+    <div class="text-center mt-4">
+        <p>Logged in as: {{ user.username }}</p>
+        <form action="{% url 'sign-out' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">
+                Logout
+            </button>
+        </form>
+    </div>
+{% else %}
+    <p class="text-center">Anonymous User</p>
+{% endif %}
+{% endblock %}

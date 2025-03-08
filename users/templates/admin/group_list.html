@@ -1,0 +1,40 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block content %}
+<div class="mx-auto w-1/2 mt-8">
+    <table class="table-auto border border-separate">
+        <thead>
+          <tr>
+            <th class=" border border-separate">Group Name</th>
+            <th class=" border border-separate">Assigned Task</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for group in groups %}
+            <tr>
+                <td class=" border border-separate px-5 py-3" >{{group.name}}</td>
+                
+                <td>
+                    <ul>
+                        {% for permission  in group.permissions.all %}
+                        <li>{{permission.name}} | {{permission.codename}}</li>
+                        {% empty %}
+                        <span>No permission Assigned</span>
+                        {% endfor %}
+
+                            
+                    </ul>
+                </td>
+                
+               
+              </tr>
+            {% endfor %}
+                
+          
+         
+        </tbody>
+      </table>
+</div>
+{% endblock content %}
+    

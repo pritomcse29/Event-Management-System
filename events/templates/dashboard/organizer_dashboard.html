@@ -1,0 +1,110 @@
+{% extends 'dashboard/navigation_bar.html' %}
+{% load static %}
+{% block events %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+<div class="mt-8">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="text-black font-bold text-lg">
+      <h1>Dashboard</h1>
+    </div>
+    <div>
+      <form method="GET" action="{% url 'event-details' %}" class="flex items-center space-x-2">
+          <input type="text" name="q" value="{{ search_query }}" placeholder="Search Events.." class="border rounded-md p-2">
+          <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+  <a href="{% url 'organizer-dashboard' %}?type=pubs">
+    <div class="shadow-xl py-5 px-5 text-center">
+        <h2 class="text-lg font-bold">Total Unique Participants</h2>
+        <div class="bg-red-500 w-24 h-24 rounded-full mx-auto flex items-center justify-center text-white text-lg font-bold">
+            <h3>{{ pubs }}</h3>
+        </div>
+    </div>
+  </a>
+  <a href="{% url 'organizer-dashboard' %}?type=total">
+    <div class="shadow-xl py-5 px-5 text-center">
+        <h2 class="text-lg font-bold">Total Events</h2>
+        <div class="bg-teal-500 w-24 h-24 rounded-full mx-auto flex items-center justify-center text-white text-lg font-bold">
+            <h3>{{ counts.total }}</h3>
+        </div>
+    </div>
+  </a>
+  <a href="{% url 'organizer-dashboard' %}?type=upcoming_events">
+    <div class="shadow-xl py-5 px-5 text-center">
+        <h2 class="text-lg font-bold">Upcoming Events</h2>
+        <div class="bg-violet-400 w-24 h-24 rounded-full mx-auto flex items-center justify-center text-white text-lg font-bold">
+            <h3>{{ counts.upcoming_events }}</h3>
+        </div>
+    </div>
+  </a>
+  <a href="{% url 'organizer-dashboard' %}?type=past_events">
+    <div class="shadow-xl py-5 px-5 text-center">
+        <h2 class="text-lg font-bold">Past Events</h2>
+        <div class="bg-teal-400 w-24 h-24 rounded-full mx-auto flex items-center justify-center text-white text-lg font-bold">
+            <h3>{{ counts.past_events }}</h3>
+        </div>
+    </div>
+  </a>
+</div>
+
+<div class="container mx-auto grid grid-cols-1 gap-4 mt-8">
+  <div class="shadow-xl py-5 px-5">
+    <h2 class="text-lg font-bold bg-red-500 rounded-xl py-3 px-3 text-white mb-3">All Events Listing</h2>
+    <div class="grid lg:grid-cols-7 sm:grid-cols-2 gap-4 mb-3">
+        <h2 class="text-lg font-bold text-violet-500 border-b-2">Event Name</h2>
+        <h2 class="text-lg font-bold text-violet-500 border-b-2">Event Date</h2>
+        <h2 class="text-lg font-bold text-violet-500 border-b-2">Event Time</h2>
+    </div>
+    {% for event in events %}
+      <div class="grid lg:grid-cols-7 sm:grid-cols-1 gap-4 mb-4">
+          <div>
+              <a href="{% url 'event-detail' event.id %}">{{ event.name }}</a>
+          </div>
+          <div>{{ event.date }}</div>
+          <div>{{ event.time }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container mx-auto grid grid-cols-1 gap-4 mt-4">
+  <div class="flex justify-between mb-3">
+    <h2 class="text-lg font-bold bg-red-500 rounded-xl py-3 px-3 text-white">Today's Event List</h2>
+    <div><i class="fa-solid fa-ellipsis-vertical"></i></div>
+  </div>
+  <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
+    {% for event in events %}
+      {% if event.date|date:"Y-m-d" == today|date:"Y-m-d" %}
+        <div class="flex mb-12">
+          <div class="flex-none h-14 shadow-lg">
+            <!-- <div>
+                <img src="{% static 'images/banner_event.png' %}" class="w-1/2 h-96"  alt="Event Image">
+            </div> -->
+        
+            <div class="mx-auto py-3 flex justify-between">
+                <p><strong>Event Name : </strong> {{ event.name }} | </p>
+                <p><strong>Event Time : </strong> {{ event.time }} | </p> 
+                <p><strong>Location : </strong> {{ event.location }} </p>
+            </div>
+            <div>
+                <a href="{% url 'detail-page' event.id %}">
+                    <button class="px-2 py-2 text-black hover:text-red-500 border-r-2 mb-2 font-bold text-lg">View Details</button>
+                </a>
+            </div>
+        </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock events %}
+

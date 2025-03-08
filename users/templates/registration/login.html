@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body>
+    <div class="mx-auto bg-slate-500 w-1/2 py-5 px-5 mt-8">
+        <h1 class="text-white bold text-xl text-center">Login Form</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div >
+                <label for="{{field.id_for_label}}" class="text-white text-xl bold">
+                    {{field.label}}
+                </label>
+                <div >
+                    {{field}}
+                </div>
+                
+                {% if field.errors %}
+                <div class="text-red-500">
+                     <ul>
+                        
+                        {% for error in field.errors %}
+                            <li>{{error}}</li>
+                        {% endfor %}
+                            
+                     </ul>
+                </div>
+                    
+                {% endif %}
+                    
+            </div>
+            
+        {% endfor %}
+            <button type="submit" class="mt-5 bg-slate-600 text-white py-2 px-2 rounded-lg">Submit</button>
+            <h2 class="text-white px-3 py-2"><a href="{% url 'register' %}">have no account? Create Your Account</a></h2>
+        </form>
+        
+    
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management System</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-gray-100">
+     <nav class="bg-gray-900 text-white p-4">
+          <div class="container mx-auto flex justify-between items-center">
+             <div class="text-2xl font-bold">
+                    Event Management System
+             </div>
+
+             <!-- Navbar Links (Desktop) -->
+              <ul id="menu" class="hidden md:flex space-x-6">
+                   <li><a href="{% url 'admin-dashboard' %}" class="hover:text-gray-400">Dashboard</a></li>
+                   <li><a href="{% url 'create-group' %}" class="hover:text-gray-400">Create Group</a></li>
+                   <li><a href="{% url 'view-group' %}" class="hover:text-gray-400">Groups</a></li>
+                   
+              </ul>
+
+              <!-- Right Side User Icon -->
+              <div class="relative">
+                  <button id="user-icon" class="text-white text-2xl focus:outline-none">
+                      👤
+                  </button>
+
+                  <!-- Dropdown Menu -->
+                  <!-- create-event create-category  -->
+                  <div id="user-dropdown" class="absolute right-0 mt-2 w-40 bg-white text-gray-900 shadow-md rounded-lg hidden">
+                      <a href="{% url 'create-event' %}" class="block px-4 py-2 hover:bg-gray-200">Add Event</a>
+                      <a href="{% url 'create-category' %}" class="block px-4 py-2 hover:bg-gray-200">Add Category</a>
+                      <a href="{% url 'all-category' %}" class="block px-4 py-2 hover:bg-gray-200">Category List</a>
+                      <a href="{% url 'all-event' %}" class="block px-4 py-2 hover:bg-gray-200">Event List</a>
+                      <a href="#" class="block px-4 py-2 hover:bg-gray-200">
+                         <form method="post" action="{% url 'sign-out' %}">
+                             {% csrf_token %}
+                            <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                 Logout
+                            </button>
+                          </form>
+                      </a>
+                  </div>
+              </div>
+
+              <!-- Burger Menu Button (Mobile) -->
+              <button id="menu-btn" class="text-3xl md:hidden focus:outline-none">
+                &#9776;
+              </button>
+          </div>
+
+          <!-- Mobile Menu -->
+          <ul id="mobile-menu" class="flex flex-col space-y-2 mt-4 text-center bg-gray-800 hidden md:hidden p-4">
+               <li><a href="#" class="block p-2 hover:bg-gray-700">Dashboard</a></li>
+               <li><a href="{% url 'view-group' %}" class="block p-2 hover:bg-gray-700">Groups</a></li>
+               <li><a href="{% url 'create-group' %}" class="block p-2 hover:bg-gray-700" >Create Group</a></li>
+              
+          </ul>
+     </nav>
+     <main>
+          
+          {% block content %}
+               {% include 'admin/user_list.html' %}
+          {% endblock content %}
+               
+          
+     </main>
+     <script>
+          // Burger Menu Toggle
+          const menuBtn = document.getElementById('menu-btn');
+          const mobileMenu = document.getElementById("mobile-menu");
+
+          menuBtn.addEventListener('click', () => {
+               mobileMenu.classList.toggle("hidden");
+          });
+
+          // User Dropdown Toggle
+          const userIcon = document.getElementById("user-icon");
+          const userDropdown = document.getElementById("user-dropdown");
+
+          userIcon.addEventListener("click", () => {
+               userDropdown.classList.toggle("hidden");
+          });
+
+          // Hide dropdown if clicked outside
+          document.addEventListener("click", function (event) {
+              if (!userIcon.contains(event.target) && !userDropdown.contains(event.target)) {
+                  userDropdown.classList.add("hidden");
+              }
+          });
+     </script>
+
+</body>
+</html>

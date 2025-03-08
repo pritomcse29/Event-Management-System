@@ -1,0 +1,29 @@
+<table class="container table-auto border border-separate mx-auto mt-5">
+    <thead>
+      <tr >
+        <th class="border border-slate-200 px-5 py-3">Number</th>
+        <th class="border border-slate-200 px-5 py-3">Username</th>
+        <th class="border border-slate-200 px-5 py-3">Email</th>
+        <th class="border border-slate-200 px-5 py-3">User Id</th>
+        <th class="border border-slate-200 px-5 py-3">Current Role</th>
+        <th class="border border-slate-200 px-5 py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+        {% for user in users %}
+        <tr>
+            <td class="border border-slate-200 px-5 py-3 text-center">{{forloop.counter}}</td>
+            <td class="border border-slate-200 px-5 py-3 text-center">{{user.first_name}} {{user.last_name}}</td>
+            <td class="border border-slate-200 px-5 py-3 text-center">{{user.email}}</td>
+            <td class="border border-slate-200 px-5 py-3 text-center">{{user.id}}</td>
+            <td class="border border-slate-200 px-5 py-3 text-center">{{user.groups.first.name|default:'No Group Assign'}}</td>
+            <td class="border border-slate-200 px-5 py-3 text-center bg-slate-500 text-white rounded-xl"><a href="{% url 'assign-role' user.id %}">Change Role</a></td>
+          </tr>
+        {% endfor %}
+            
+     
+     
+    
+    </tbody>
+  </table>

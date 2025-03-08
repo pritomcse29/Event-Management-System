@@ -4,47 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Event Management System</title>
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="https://kit.fontawesome.com/1c433b5b8c.js" crossorigin="anonymous"></script>
 </head>
-<body >
-    <!-- <div class="grid grid-flow-col md:grid-flow-col-dense  content-center"> -->
-         <div class="  bg-slate-100 py-3 px-3 ">
-          <div class="container mx-auto md:flex sm:flex-wrap  justify-between">
-            <div>
-                <h2 class="text-black font-bold">Event Management System</h2>
-                </div>
-            
-                 <div >
-                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" >Home</a>
-                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'dashboard' %}">Dashboard</a>
-                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'create-event' %}">Create Events</a>
-                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'create-participant' %}">Create Participants</a>
-                     <a class="mr-3 text-black sm:text-sm text-lg hover:text-indigo-500" href="{% url 'create-category' %}">Create Categories</a>
-                     
-                 </div>
-          </div>
+<body class="bg-slate-100">
+    <!-- Mobile Menu (Visible only on small screens) -->
+    <div class="md:hidden bg-slate-100 py-3 px-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <h2 class="text-black font-bold">Event Management System</h2>
+            <button id="menu-toggle" class="text-black focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden flex flex-col mt-3 space-y-2">
+            <a class="text-black hover:text-indigo-500" href="{% url 'admin-dashboard' %}">Admin Dashboard</a>
+            <a class="text-black hover:text-indigo-500" href="{% url 'organizer-dashboard' %}">Dashboard</a>
+            <a class="text-black hover:text-indigo-500" href="{% url 'create-event' %}">Add Events</a>
+            <a class="text-black hover:text-indigo-500" href="{% url 'create-category' %}">Add Categories</a>
+            <a class="text-black hover:text-indigo-500" href="{% url 'sign-out' %}">Sign Out</a>
+        </div>
+    </div>
 
-            
-         </div>
-         
-      <!-- </div> -->
-      
-      {% block events %}
-        
-      {% endblock events %}
-        
-      {% block forms %}
-            
-      {% endblock forms %}
+    <!-- Desktop Menu (Visible only on medium and larger screens) -->
+    <div class="hidden md:flex bg-slate-100 py-3 px-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <h2 class="text-black font-bold">Event Management System</h2>
+            <div class="flex space-x-6">
+                <a class="text-black hover:text-indigo-500" href="{% url 'admin-dashboard' %}">Admin Dashboard</a>
+                <a class="text-black hover:text-indigo-500" href="{% url 'organizer-dashboard' %}">Dashboard</a>
+                <a class="text-black hover:text-indigo-500" href="{% url 'create-event' %}">Add Events</a>
+                <a class="text-black hover:text-indigo-500" href="{% url 'create-category' %}">Add Categories</a>
+                <a class="text-black hover:text-indigo-500" href="{% url 'sign-out' %}">Sign Out</a>
+            </div>
+        </div>
+    </div>
 
-      
-      {% block details %}
-        
-      {% endblock details %}
-        
-            
+    {% block events %}
+    <!-- Content for Events will go here -->
+    {% endblock events %}
+
+    {% block forms %}
+    <!-- Content for Forms will go here -->
+    {% endblock forms %}
+
+    {% block details %}
+    <!-- Content for Details will go here -->
+    {% endblock details %}
+
+    {% block allEvents %}
+    {% endblock allEvents %}
+    
+{% include 'footer.html' %}
+    <script>
+        // Toggle the mobile menu visibility
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-gray-900 text-white p-4">
+       <div class="container mx-auto flex justify-between items-center">
+          <div class="text-2xl fornt-bold">
+              Even management System
+          </div>
+          <!--Burger Menu Button-->
+          <button id="menu-btn" class="text-3xl md:hidden focus:outline-none">
+            &#9776;
+          </button>
+          <!--Navbar Links-->
+          <ul id="menu" class="hidden md:flex space-x-6">
+            <li>
+                <a href="{% url 'sign-in' %}" class="hover:text-gray-400">
+                <button>Login</button>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'register' %}" class="hover:text-gray-400">
+                <button>Register</button>
+            </a>
+       </li>
+          </ul>
+       </div>
+       <!--Mobile Menu-->
+       <ul id="mobile-menu" class="hidden flex flex-col space-y-2 mt-4 text-center bg-gray-800 md:hidden p-4">
+        <li>
+            <a href="{% url 'sign-in' %}" class="block p-2 hover:text-gray-400">
+            <button>Login</button>
+        </a>
+    </li>
+    <li>
+        <a href="" class="block p-2 hover:text-gray-400">
+            <button>Register</button>
+        </a>
+   </li>
+       </ul>
+    </nav>
+
+<script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuBtn.addEventListener("click",()=>{
+        mobileMenu.classList.toggle("hidden");
+    })
+</script>
+ 
+ <!-- {% if user.is_authenticated %}
+ {{user}}
+ {{user.id}}
+ <form action="{% url 'sign-out' %}" method="POST">
+    {% csrf_token %}
+     <button type="submit">logout</button>
+</form>
+    {% else %}
+    anonymous
+ {% endif %} -->
+
+    
+</body>
+</html>
