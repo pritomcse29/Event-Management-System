@@ -66,7 +66,7 @@ def organizer_dashboard(request):
         
     }
 
-    return render(request, 'dashboard/organizer_dashboard.html', {'context':context})
+    return render(request, 'dashboard/organizer_dashboard.html', context)
      
 @login_required
 @permission_required("events.add_event",login_url='no-permission')
