@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,8 +64,9 @@ INTERNAL_IPS = [
     # ...
 ]
 ROOT_URLCONF = 'event_management.urls'
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TEMPLATES = [
     {
