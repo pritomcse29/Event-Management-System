@@ -295,7 +295,7 @@ def user_registered_events(request):
         'registered_events': registered_events,
     })
 @login_required
-@user_passes_test(is_participant)
+@user_passes_test(is_organizer)
 def event_detail(request,event_id):
     event = Event.objects.get(id=event_id)
     return render (request,'dashboard/event_detail.html',{'event':event})
