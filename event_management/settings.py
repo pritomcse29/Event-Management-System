@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -99,21 +100,28 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME',default=''),
+#         'USER': config('DB_USER',default=''),
+#         'PASSWORD': config('DB_PASSWORD',default=''),
+#         'HOST': config('DB_HOST',default='localhost'),
+#         'PORT': config('DB_PORT', cast=int)
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME',default=''),
-        'USER': config('DB_USER',default=''),
-        'PASSWORD': config('DB_PASSWORD',default=''),
-        'HOST': config('DB_HOST',default='localhost'),
-        'PORT': config('DB_PORT', cast=int)
-    }
+    'default': dj_database_url.config(
+       default='postgresql://event_management_awfq_user:r82430eA655kdjNdht9MJPNl4bsb8XXP@dpg-cuspannnoe9s7391u6gg-a.oregon-postgres.render.com/event_management_awfq', conn_max_age=600   
+         )
 }
 
 # DATABASES = {
 #     'default': dj_database_url.config(
-#        default='postgresql://event_management_awfq_user:r82430eA655kdjNdht9MJPNl4bsb8XXP@dpg-cuspannnoe9s7391u6gg-a.oregon-postgres.render.com/event_management_awfq', conn_max_age=600   
-#          )
+#         default=config('DATABASE_URL_LOCAL'), 
+#         alternate=config('DATABASE_URL_RENDER', default=None)  
+#     )
 # }
 
 # Password validation
@@ -166,5 +174,5 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER')  
-FRONTEND_URL = 'http://127.0.0.1:8000'
+FRONTEND_URL = 'https://event-management-system-5ip4.onrender.com/'
 LOGIN_URL = 'sign-in'
