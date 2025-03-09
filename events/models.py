@@ -15,7 +15,7 @@ class Event(models.Model):
     description = models.CharField(max_length=500)
     date = models.DateField()
     time = models.TimeField()
-    location = models.CharField()
+    location = models.CharField(max_length=250)
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE, 

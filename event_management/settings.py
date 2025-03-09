@@ -94,12 +94,12 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # DATABASES = {
@@ -113,11 +113,11 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-       default='postgresql://event_management_awfq_user:r82430eA655kdjNdht9MJPNl4bsb8XXP@dpg-cuspannnoe9s7391u6gg-a.oregon-postgres.render.com/event_management_awfq', conn_max_age=600   
-         )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#        default='postgresql://event_management_awfq_user:r82430eA655kdjNdht9MJPNl4bsb8XXP@dpg-cuspannnoe9s7391u6gg-a.oregon-postgres.render.com/event_management_awfq', conn_max_age=600   
+#          )
+# }
 
 # DATABASES = {
 #     'default': dj_database_url.config(
