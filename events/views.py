@@ -77,7 +77,7 @@ def create_event(request):
         event_e  = EventModelForm(request.POST, request.FILES)
         if event_e.is_valid():
                 event_e.save()
-                return redirect('participant-dashboard')
+                return redirect('create-event')
     
         else:
             event_e =  EventModelForm()
